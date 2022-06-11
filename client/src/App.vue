@@ -11,9 +11,9 @@
     <v-main>
       <v-row class= "mt-5">
       <v-spacer></v-spacer>
-        <router-link :to="{name: 'Home'}" class="mr-5">Libros</router-link>
-        <router-link :to="{name: 'Usuarios'}" class="mr-5">Usuarios</router-link>
-        <router-link :to="{name: 'Prestamos'}">Prestamos</router-link>
+        <router-link :to="{name: 'Home'}" class="mr-5">Comidas</router-link>
+        <router-link :to="{name: 'Meseros'}" class="mr-5">Meseros</router-link>
+        <router-link :to="{name: 'Ordenes'}">Ordenes</router-link>
       <v-spacer></v-spacer>
       </v-row>
       <router-view>

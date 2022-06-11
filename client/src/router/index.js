@@ -11,16 +11,23 @@ const routes = [
     component: Home
   },
   {
-    path: '/usuarios',
-    name: 'Usuarios',
-    component: () => import('../views/Usuarios.vue')
+    path: '/meseros',
+    name: 'Meseros',
+    component: () => import('../views/Meseros.vue')
   },
 
   {
-    path: '/prestamos',
-    name: 'Prestamos',
-    component: () => import('../views/Prestamos.vue')
+    path: '/ordenes',
+    name: 'Ordenes',
+    component: () => import('../views/Ordenes.vue')
   },
+
+  {
+    path: '/mesas',
+    name: 'Mesas',
+    component: () => import('../views/Mesas.vue')
+  },
+
 
   {
     path: '/about',

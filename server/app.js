@@ -12,9 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/libros', require('./routes/libro'));
-app.use('/usuarios', require('./routes/usuario'));
-app.use('/prestamos', require('./routes/prestamo'));
+app.use('/comidas', require('./routes/comida'));
+app.use('/meseros', require('./routes/mesero'));
+app.use('/ordenes', require('./routes/orden'));
+app.use('/mesas', require('./routes/mesa'));
 
 //API REST --> HTTP --> Web 
 // GET, POST --> Enviar y recuperar información 

@@ -7,7 +7,7 @@ const connection = mysql.createPool({
     host: 'localhost',
     user: 'proyectofinal',
     password: 'GERARDO180999',
-    database: 'biblioteca_db'
+    database: 'bar_db'
 });
 
 //Mas conection 
