@@ -13,7 +13,7 @@
       <v-spacer></v-spacer>
         <router-link :to="{name: 'Home'}" class="mr-5">Comidas</router-link>
         <router-link :to="{name: 'Meseros'}" class="mr-5">Meseros</router-link>
-        <router-link :to="{name: 'Ordenes'}">Ordenes</router-link>
+        <router-link :to="{name: 'Ordenes'}" class="mr-5">Ordenes</router-link>
       <v-spacer></v-spacer>
       </v-row>
       <router-view>

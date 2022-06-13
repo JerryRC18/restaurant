@@ -5,7 +5,10 @@ const connection = require('../connection');
 
 router.get('/todas_las_comidas', async (req, res) => { //funcion asincrona
     try{
-        const query = 'SELECT * FROM comida_bebida';
+        //const query = 'SELECT * FROM comida_bebida';
+        
+        const query = 'SELECT com_id, com_producto, com_precio, com_categoria FROM comida_bebida, categoria WHERE com_cat_id = cat_id';
+        
         const comidas = await connection.query(query);
 
         res.json(comidas);

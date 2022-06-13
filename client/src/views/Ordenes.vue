@@ -19,10 +19,10 @@
                 <v-icon @click="eliminar_orden(item)" small class="mr-3">
                 fas fa-trash
                 </v-icon>
-                 <v-icon @click="agregar_orden(item)" small class="mr-3">
+                 <v-icon @click="agregar_comidas(item)" small class="mr-3">
                 fas fa-pencil-alt
                 </v-icon>
-                <v-icon @click="detalles_orden(item)" small>
+                <v-icon @click="detalle_orden(item)" small>
                 fas fa-eye
                 </v-icon>
             </template>
@@ -101,21 +101,26 @@
                 </v-card-title>
                 <v-card-text>
                     <v-container>
-                        <v-row v-for="(comida, index) in detalles_orden" v-bind:key="index">
+                        <v-row v-for="(comida, index) in det_orden" v-bind:key="index">
                             <v-col cols="12">
                                 <v-select
                                     :items="comidas"
-                                    label="Titulo de la comida"
+                                    label="Nombre de la comida"
                                     v-model="comida.deto_com_id"
                                 >
                                 </v-select>
                             </v-col>
+                            <v-col cols='6'>
+                                <v-text-field v-model="comida.deto_cant" label ='Cantidad'>
+                                </v-text-field>
+                            </v-col>
+       
                         </v-row>
                     </v-container>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="success" @click="guardar_libros()">Guardar</v-btn>
+                    <v-btn color="success" @click="guardar_comidas()">Guardar</v-btn>
                     <v-btn color="error" @click="cancelar()">Cancelar</v-btn>
                 </v-card-actions>
             
@@ -133,6 +138,12 @@
                                 <v-text-field
                                     label="Nombre de la comida"
                                     v-model="comida.com_producto"
+                                    disabled
+                                >   
+                                </v-text-field>
+                                 <v-text-field
+                                    label="Cantidad"
+                                    v-model="comida.deto_cant"
                                     disabled
                                 >   
                                 </v-text-field>
@@ -165,7 +176,7 @@ export default {
                     sortable: false,
                     value: 'ord_id',
                 },
-                { text: 'Mesero', value: 'ord_mr_id' },
+                { text: 'Mesero', value: 'usu_nom_comp' },
                 { text: 'Mesa', value: 'ord_ms_id' },
                 { text: 'Fecha de Orden', value: 'ord_fecha' },
                 { text: 'Total', value: 'ord_total'},
@@ -176,7 +187,7 @@ export default {
                 meseros: [],
                 mesas: [],
                 comidas: [],
-                detalles_orden: [],
+                det_orden: [],
                 comidas_servidas: [],
                 deto_ord_id: '',
                 
@@ -213,10 +224,10 @@ export default {
         },
 
         async llenar_mesas(){
-            const api_data = await this.axios.get('/meseros/todas_las_mesas/');
+            const api_data = await this.axios.get('/mesas/todas_las_mesas/');
             api_data.data.forEach((item) => {
                 this.mesas.push ({
-                    text: item.ms_id + ' ' + item.ms_asientos + ' ' + item.ms_area,
+                    text: item.ms_id + ' Lugares:' + item.ms_asientos + ' Area:' + item.ms_area,
                     value: item.ms_id
 
                 });
@@ -248,18 +259,19 @@ export default {
 
 
 
-        async eliminar_orden(item){
-        const body = {
-          ord_id: item.ord_id
-        };
-        await this.axios.post('/ordenes/eliminar_orden/', body);
-        this.llenar_ordenes();
+            async eliminar_orden(item){
+                const body = {
+                    ord_id: item.ord_id
+                };
+            await this.axios.post('/ordenes/eliminar_orden/', body);
+            
+            this.llenar_ordenes();
 
-      },
+        },
 
       cancelar(){
         this.nueva_orden = {};
-        this.detalles_orden = [];
+        this.det_orden = [];
         this.nl_dialog = false;
         this.np_dialog = false;
       },
@@ -274,12 +286,14 @@ export default {
       async guardar_comidas(){
           const body = {
               deto_ord_id: this.deto_ord_id,
+              deto_cant: this.deto_cant,
               deto_com_id: ''
 
           }
 
-            this.detalles_orden.forEach(async (comida)=> {
+            this.det_orden.forEach(async (comida)=> {
             body.deto_com_id = comida.deto_com_id;
+            body.deto_cant = comida.deto_cant;
             await this.axios.post('/ordenes/nuevo_det_orden/', body);
             });
         this.cancelar();
@@ -300,7 +314,7 @@ export default {
 
       },
 
-      async detalles_orden(item){
+    async detalle_orden(item){
           this.p_dialog = true;
           const api_data = await this.axios.get('ordenes/leer_det_orden/' + item.ord_id.toString());
           this.comidas_servidas = api_data.data; 

@@ -16,6 +16,7 @@ app.use('/comidas', require('./routes/comida'));
 app.use('/meseros', require('./routes/mesero'));
 app.use('/ordenes', require('./routes/orden'));
 app.use('/mesas', require('./routes/mesa'));
+app.use('/categorias', require('./routes/categoria'));
 
 //API REST --> HTTP --> Web 
 // GET, POST --> Enviar y recuperar información 

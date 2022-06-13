@@ -38,10 +38,12 @@
               <v-text-field v-model="nueva_comida.com_precio" label ='Precio'>
               </v-text-field>
             </v-col>
-            <v-col cols='6'>
-              <v-text-field v-model="nueva_comida.com_cat_id" label ='Categoria'>
-              </v-text-field>
-            </v-col>
+            <v-select
+                :items="categorias"
+                v-model="nueva_comida.com_cat_id"
+                label="Categoría"
+            >
+            </v-select>
           </v-row>
         </v-container>
       <v-card-actions>
@@ -75,12 +77,11 @@
           },
           { text: 'Comida', value: 'com_producto' },
           { text: 'Precio', value: 'com_precio' },
-          { text: 'Categoria', value: 'com_cat_id' },
+          { text: 'Categoria', value: 'com_categoria' },
           { text: 'Acciones', value: 'actions'}
         ],
-        comidas: [
-
-        ],
+        comidas: [],
+        categorias: [],
 
         nl_dialog: false,
 
@@ -97,9 +98,21 @@
 
     created(){
         this.llenar_comidas();
+        this.llenar_categorias();
       },
 
     methods: {
+
+      async llenar_categorias(){
+            const api_data = await this.axios.get('/categorias/todas_las_categorias/');
+            api_data.data.forEach((item) => {
+                this.categorias.push ({
+                    text: item.com_categoria, 
+                    value: item.cat_id
+
+                });
+            });
+        },
 
       async llenar_comidas(){
         const api_data = await this.axios.get('/comidas/todas_las_comidas/');
