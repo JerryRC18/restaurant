@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios);
 
-axios.defaults.baseURL = 'https://proyectolenguajes.herokuapp.com/:80';
+axios.defaults.baseURL = 'https://proyectolenguajes.herokuapp.com:80/';
 
 new Vue({
   router,
