@@ -36,7 +36,7 @@ app.get('/', function(req, res){
 //});
 
 //Decirle a nuestra api en que puerto correr (escuchar)
-const PORT = process.env.PORT || 3000;
+const PORT = process.ENV.PORT || 80;
 app.listen(PORT, function(){
     console.log('¡API esta corriendo!');
 });
