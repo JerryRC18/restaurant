@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios);
 
-axios.defaults.baseURL = 'https://git.heroku.com/mysterious-coast-71905.git';
+axios.defaults.baseURL = 'http://192.168.100.23:3000/';
 
 new Vue({
   router,
