@@ -4,7 +4,12 @@
       app
       color="primary"
       dark
+      extended
+      extension-height="100"
+      src="https://www.umbgolfclub.com/wp-content/uploads/2019/11/restaurante_7-1.jpg"
+      fade-img-on-scroll
     >
+    
 
     </v-app-bar>
 
