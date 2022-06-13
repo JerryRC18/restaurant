@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios);
 
-axios.defaults.baseURL = 'https://62a79b0fd3177a1ede705ba5--meek-malabi-4f7c74.netlify.app/';
+axios.defaults.baseURL = 'https://62a79b0fd3177a1ede705ba5--meek-malabi-4f7c74.netlify.app/:3000';
 
 new Vue({
   router,
